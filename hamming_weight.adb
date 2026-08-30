@@ -77,6 +77,7 @@ package body Hamming_Weight is
    ---------------------------------------------------------------------------
    -- Lookup Table Initialization Helper
    ---------------------------------------------------------------------------
+   -- Placed inside the body so it can safely call Naive_Count after elaboration
    function Build_Lookup_Table return Lookup_Array is
       Result : Lookup_Array;
    begin
@@ -86,6 +87,12 @@ package body Hamming_Weight is
       end loop;
       return Result;
    end Build_Lookup_Table;
+
+   ---------------------------------------------------------------------------
+   -- The Static Precomputed Table
+   ---------------------------------------------------------------------------
+   -- Instantiated here to avoid the "Access Before Elaboration" Program_Error
+   Popcount_Table : constant Lookup_Array := Build_Lookup_Table;
 
    ---------------------------------------------------------------------------
    -- Precomputed Lookup Table Algorithm
