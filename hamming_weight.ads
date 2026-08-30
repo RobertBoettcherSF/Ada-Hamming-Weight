@@ -48,11 +48,5 @@ private
    
    -- Array type for the lookup table mapping a Byte to its popcount
    type Lookup_Array is array (Byte) of Bit_Count;
-   
-   -- Helper function to precompute the lookup table at package initialization
-   function Build_Lookup_Table return Lookup_Array;
-   
-   -- The static precomputed table itself
-   Popcount_Table : constant Lookup_Array := Build_Lookup_Table;
 
 end Hamming_Weight;
